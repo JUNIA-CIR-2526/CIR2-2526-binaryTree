@@ -12,5 +12,6 @@ public class Main {
         System.out.println(binaryTree.prefix());
         System.out.println(binaryTree.infix());
         System.out.println(binaryTree.suffix());
+        System.out.println(binaryTree.byWidth());
     }
 }

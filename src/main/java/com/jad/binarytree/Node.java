@@ -3,8 +3,7 @@ package com.jad.binarytree;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Getter
 @Setter
@@ -53,6 +52,19 @@ class Node<E> {
         if (this.right != null) result.addAll(this.right.suffix());
         result.add(this.value);
 
+        return result;
+    }
+
+    public List<E> byWidth() {
+        List<E> result = new ArrayList<>();
+        Queue<Node<E>> queue = new LinkedList<>();
+        queue.add(this);
+        while(!queue.isEmpty()) {
+            Node<E> current = queue.remove();
+            result.add(current.value);
+            if(current.getLeft()!= null) queue.add(current.getLeft());
+            if(current.getRight() != null) queue.add(current.getRight());
+        }
         return result;
     }
 }

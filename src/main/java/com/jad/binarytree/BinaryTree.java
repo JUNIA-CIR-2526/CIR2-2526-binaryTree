@@ -18,7 +18,12 @@ public class BinaryTree<E> {
     public List<E> suffix() {
         if (this.root == null) return new ArrayList<>();
         return this.root.suffix();
-    };
+    }
+
+    public List<E> byWidth() {
+        if(this.root == null) return new ArrayList<>();
+        return this.root.byWidth();
+    }
 
     public BinaryTree(final List<E> values) {
         if (values == null || values.isEmpty()) {
