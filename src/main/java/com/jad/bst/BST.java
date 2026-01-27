@@ -67,6 +67,21 @@ public class BST<E> implements IBinaryNode<E> {
         return this.root.toMMDString();
     }
 
+    @Override
+    public int getHeight() {
+        return (this.root == null) ? 0 : this.root.getHeight();
+    }
+
+    @Override
+    public int getBalancingFactor() {
+        return (this.root == null) ? 0 : this.root.getBalancingFactor();
+    }
+
+    @Override
+    public boolean isBalanced() {
+        return this.root == null || this.root.isBalanced();
+    }
+
     public void toMMDFile(final String fileName) {
         if (this.root == null) return;
         StringBuilder sb = new StringBuilder();
@@ -74,9 +89,12 @@ public class BST<E> implements IBinaryNode<E> {
         String temp = this.root.getData().toString();
         temp = temp.substring(1, temp.length() - 1);
         sb.append("START -->").append(this.root.getIndex()).append("(").append(this.root.getIndex()).append("-").append(
-                temp).append(")").append("\n");
+                temp).append(" = ").append(this.getBalancingFactor()).append(")").append("\n");
         sb.append(this.root.toMMDString());
         sb.append("\n");
+//        sb.append("classDef red fill:#ff4d4d,stroke:#b30000,color:#fff;");
+//        sb.append("class ");
+//        sb.append(" rouge;");
         FileWriter writer = null;
         try {
             writer = new FileWriter(fileName);

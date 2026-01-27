@@ -69,7 +69,7 @@ public class BinaryNode<E> implements IBinaryNode<E> {
             sb.append(this.index).append(" --> ").append(this.left.getIndex()).append("(").append(
                     this.left.getIndex()).append(
                     "-").append(
-                    temp).append(")").append("\n");
+                    temp).append(" = ").append(this.left.getBalancingFactor()).append(")").append("\n");
             sb.append(this.left.toMMDString());
         }
         if (this.right != null) {
@@ -78,10 +78,29 @@ public class BinaryNode<E> implements IBinaryNode<E> {
             sb.append(this.index).append(" --> ").append(this.right.getIndex()).append("(").append(
                     this.right.getIndex()).append(
                     "-").append(
-                    temp).append(")").append("\n");
+                    temp).append(" = ").append(this.right.getBalancingFactor()).append(")").append("\n");
             sb.append(this.right.toMMDString());
         }
         return sb.toString();
+    }
+
+    @Override
+    public int getHeight() {
+        return Math.max((this.left != null) ? this.left.getHeight() : 0,
+                        (this.right != null) ? this.right.getHeight() : 0) + 1;
+    }
+
+    @Override
+    public int getBalancingFactor() {
+        return ((this.right != null) ? this.right.getHeight() : 0) - ((this.left != null) ? this.left.getHeight() : 0);
+    }
+
+    @Override
+    public boolean isBalanced() {
+        final int balancingFactor = this.getBalancingFactor();
+        return (balancingFactor >= -1 && balancingFactor <= 1)
+                && (this.left == null || this.left.isBalanced())
+                && (this.right == null || this.right.isBalanced());
     }
 
     public List<E> getDataListByIndex(final int index) {

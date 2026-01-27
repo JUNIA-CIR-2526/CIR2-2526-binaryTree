@@ -22,4 +22,10 @@ public interface IBinaryNode<E> {
     IBinaryNode<E> getParent(int index);
 
     String toMMDString();
+
+    int getHeight();
+
+    int getBalancingFactor();
+
+    boolean isBalanced();
 }
